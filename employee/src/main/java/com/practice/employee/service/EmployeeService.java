@@ -1,5 +1,8 @@
 package com.practice.employee.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -77,5 +80,31 @@ public class EmployeeService {
 		employeeRepository.deleteById(employeeId);
 		
 	}
+	
+	public List<EmployeeResponseDto> getEmployeesByDepartment(String department){
+		
+	  List<Employee> employees = employeeRepository.findBydepartment(department);
+	  
+	  List<EmployeeResponseDto> employeeResponseDtos = new ArrayList<>();
+	  
+	      for(Employee employee : employees) {
+	    	    EmployeeResponseDto response =
+	                    new EmployeeResponseDto();
+
+	            response.setEmployeeId(employee.getEmployeeId());
+	            response.setName(employee.getName());
+	            response.setDepartment(employee.getDepartment());
+	            response.setSalary(employee.getSalary());
+	            response.setManager(employee.isManager());
+
+	    	 
+	            employeeResponseDtos.add(response);
+	      }
+	  
+	  
+	   return employeeResponseDtos;
+		
+	}
+	
 	
 }

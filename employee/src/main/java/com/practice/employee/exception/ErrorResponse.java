@@ -14,4 +14,14 @@ public record ErrorResponse (
 
 		String path// the request URI that failed (e.g., "/api/employee/99").	
 		
-){}
+
+){
+	public ErrorResponse() {
+		
+			this(LocalDateTime.now(), 0, null, null, null);
+
+		
+	}
+	
+	
+}
