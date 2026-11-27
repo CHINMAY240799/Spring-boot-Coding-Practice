@@ -2,6 +2,7 @@ package com.practice.employee.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.practice.employee.dto.EmployeeDto;
 import com.practice.employee.dto.EmployeeResponseDto;
-import com.practice.employee.entity.Employee;
 import com.practice.employee.service.EmployeeService;
 
 import jakarta.validation.Valid;
@@ -74,6 +74,23 @@ public class EmployeeController {
    		List<EmployeeResponseDto> employeeList =  employeeService.getEmployeesByDepartment(department);
    		return ResponseEntity.ok(employeeList);
    	}
+   	
+   	@GetMapping
+   	public ResponseEntity<Page<EmployeeResponseDto>> getAllEmployees(@RequestParam(defaultValue = "0") int page,
+   			@RequestParam(defaultValue = "10") int size,
+   			@RequestParam(defaultValue = "employeeId") String employeeId,
+   			@RequestParam(defaultValue = "desc") String direction
+   	
+   			) {
+   		
+   		
+   		Page<EmployeeResponseDto> employeeResponse = employeeService.getAllEmployees(page, size,employeeId,direction);
+   		
+   		return ResponseEntity.ok(employeeResponse);
+   	}
+   	
+   	
+   	
    	
    	
 }

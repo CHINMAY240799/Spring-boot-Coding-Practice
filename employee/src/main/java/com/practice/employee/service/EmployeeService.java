@@ -3,6 +3,10 @@ package com.practice.employee.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -106,5 +110,26 @@ public class EmployeeService {
 		
 	}
 	
+	public Page<EmployeeResponseDto> getAllEmployees(int page, int size, String sortBy, String direction){
+		
+		
+		Sort sort = direction.equalsIgnoreCase("desc") ? Sort.by(sortBy).descending() : Sort.by(sortBy).ascending();
+		
+		Pageable request = PageRequest.of(page, size, sort);
+		
+		Page<Employee> result = employeeRepository.findAll(request);
+		
+		
+		
+		return result.map(emp -> new EmployeeResponseDto(
+		        emp.getEmployeeId(),
+		        emp.getName(),
+		        emp.getDepartment(),
+		        emp.getSalary(),
+		        emp.isManager()
+		));
+					
+		
+	}
 	
 }
