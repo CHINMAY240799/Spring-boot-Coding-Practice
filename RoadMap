@@ -1,0 +1,180 @@
+Since you're preparing for a **Java Backend Developer interview**, I recommend practising Spring Boot coding problems that test whether you can actually build REST APIs, work with databases, implement business logic, and handle production scenarios.
+
+I'll arrange these from beginner to advanced, similar to what you might encounter in a 3–5 years experienced Java Developer interview.
+
+# **Spring Boot coding interview questions**
+
+## **Level 1 – REST API fundamentals**
+
+
+
+Start here
+
+Beginner
+
+
+
+| # | Coding question                                                    | Concepts tested                 |
+| - | ------------------------------------------------------------------ | ------------------------------- |
+| 1 | Create a REST API to register a new employee.                      | Controller, Service, Repository |
+| 2 | Create CRUD APIs for an Employee entity.                           | GET, POST, PUT, DELETE          |
+| 3 | Create an API to fetch an employee by ID. Return 404 if not found. | ResponseEntity, Optional        |
+| 4 | Create an API to search employees by department.                   | RequestParam, JPA               |
+| 5 | Implement pagination and sorting for employee records.             | Pageable, PageRequest           |
+| 6 | Create an API that accepts JSON and validates employee details.    | DTO, @Valid, @NotNull           |
+
+**Your first coding challenge:**
+
+Build an Employee Management REST API.
+
+Requirements:
+
+- Create an Employee entity with `id`, `name`, `email`, `salary`, and `department`.
+- Create an API to add an employee.
+- Create an API to retrieve all employees.
+- Create an API to retrieve an employee by ID.
+- Create an API to update employee details.
+- Create an API to delete an employee.
+- Return appropriate HTTP status codes.
+
+Expected architecture:
+
+**EmployeeController**
+
+Handles HTTP requests
+
+**EmployeeService**
+
+Business logic
+
+**EmployeeRepository**
+
+Database operations
+
+**PostgreSQL**
+
+Employee table
+
+## **Level 2 – Business logic and JPA**
+
+Intermediate
+
+These are particularly important for backend developer interviews.
+
+| #  | Coding question                                                         | Concepts tested             |
+| -- | ----------------------------------------------------------------------- | --------------------------- |
+| 7  | Find employees earning more than a given salary.                        | Derived queries             |
+| 8  | Find the second-highest salary from the database.                       | JPQL / SQL                  |
+| 9  | Find employees belonging to a particular department and sort by salary. | JPA queries                 |
+| 10 | Prevent duplicate employee email registration.                          | Unique constraint           |
+| 11 | Transfer money between two bank accounts.                               | @Transactional              |
+| 12 | Implement a product inventory system that prevents negative stock.      | Transactions, concurrency   |
+| 13 | Create an API to retrieve employees hired between two dates.            | JPQL, LocalDate             |
+| 14 | Implement soft deletion instead of permanently deleting employees.      | Hibernate, entity lifecycle |
+
+**Important challenge – Bank transfer**
+
+Create two entities:
+
+- Account (accountId, accountHolder, balance)
+- Transaction (transactionId, fromAccount, toAccount, amount)
+
+Implement:
+
+```
+public void transferMoney(
+    Long fromAccount,
+    Long toAccount,
+    BigDecimal amount
+)
+```
+
+Requirements:
+
+1. Check whether both accounts exist.
+2. Check whether the sender has sufficient balance.
+3. Deduct money from sender.
+4. Add money to receiver.
+5. Save transaction details.
+6. Roll back everything if any operation fails.
+
+Use `@Transactional`.
+
+This is a very good way to demonstrate your understanding of real-world backend development.
+
+## **Level 3 – Exception handling, DTOs and validation**
+
+Intermediate–Advanced
+
+| #  | Coding question                                                        | Concepts tested                 |
+| -- | ---------------------------------------------------------------------- | ------------------------------- |
+| 15 | Create a global exception handler for the application.                 | @ControllerAdvice               |
+| 16 | Create custom exceptions such as EmployeeNotFoundException.            | Custom exceptions               |
+| 17 | Convert Entity objects into DTOs.                                      | DTO pattern                     |
+| 18 | Validate email, phone number and salary fields.                        | Bean Validation                 |
+| 19 | Return a standardized API response for every endpoint.                 | Generic response wrapper        |
+| 20 | Implement filtering using multiple optional parameters.                | Dynamic queries, Specifications |
+| 21 | Implement file upload and download APIs.                               | MultipartFile                   |
+| 22 | Implement an API that returns different responses based on user roles. | Spring Security                 |
+
+## **Level 4 – Advanced Spring Boot scenarios**
+
+Advanced
+
+These questions help distinguish someone who knows Spring Boot from someone who understands backend engineering.
+
+| #  | Coding question                                                                 | Concepts tested        |
+| -- | ------------------------------------------------------------------------------- | ---------------------- |
+| 23 | Implement JWT-based authentication.                                             | Spring Security        |
+| 24 | Create role-based authorization for ADMIN and USER.                             | SecurityFilterChain    |
+| 25 | Implement refresh token functionality.                                          | JWT, authentication    |
+| 26 | Prevent duplicate payment requests.                                             | Idempotency            |
+| 27 | Implement caching for frequently accessed employee data.                        | Redis, @Cacheable      |
+| 28 | Implement an API rate limiter.                                                  | Rate limiting          |
+| 29 | Publish an event when a new user registers.                                     | Kafka                  |
+| 30 | Implement retry logic when an external API fails.                               | Resilience4j           |
+| 31 | Implement optimistic locking for product inventory.                             | @Version               |
+| 32 | Implement an API that calls two external services and combines their responses. | RestClient / WebClient |
+
+# **My recommended 10-question interview practice set**
+
+If you have limited time, prioritize these:
+
+| Priority | Question                                  | Difficulty |
+| -------- | ----------------------------------------- | ---------- |
+| 1        | Employee CRUD API                         | Easy       |
+| 2        | DTO conversion                            | Easy       |
+| 3        | Global exception handling                 | Easy       |
+| 4        | Pagination and sorting                    | Medium     |
+| 5        | Search with dynamic filters               | Medium     |
+| 6        | Bank transfer with @Transactional         | Medium     |
+| 7        | JWT authentication                        | Medium     |
+| 8        | Product inventory with optimistic locking | Hard       |
+| 9        | Idempotent payment API                    | Hard       |
+| 10       | Kafka event-driven registration           | Hard       |
+
+# **Let's practise interactively**
+
+I suggest we follow an actual interview format.
+
+**Choose your first coding challenge**
+
+Employee CRUD API
+
+Bank transfer API
+
+JWT authentication
+
+Product inventory
+
+File upload API
+
+**Practice mode**
+
+Interview mode – requirements only, no hints
+
+Guided mode – solve step by step with hints
+
+Start coding challenge&#x20;
+
+**One recommendation:** Don't just memorize Spring Boot annotations. Practise writing Controller → Service → Repository layers yourself, including exception handling, validation and database interactions. That's what will help you move from Java support engineering into Java backend development.
